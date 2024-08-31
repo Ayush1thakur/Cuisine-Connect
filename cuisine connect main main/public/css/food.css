@@ -1,0 +1,50 @@
+.food-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.food-item img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.motion {
+    top: 45px; /* Position below the header */
+    width: 100vw;
+    position: fixed;
+    height: calc(100vh - 45px); /* Full height minus header height */
+    animation: slide 15s ease-in-out infinite; /* Adjust duration as needed */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 60px;
+    text-shadow: 1px 1px 2px black;
+    background-size: cover;
+    background-position: left center; /* Start from the left */
+}
+
+@keyframes slide {
+    0% {
+        background-image: url('https://images.pexels.com/photos/10296239/pexels-photo-10296239.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        background-position: 0% center; /* Start with the first image */
+        filter: contrast(75%);
+    }
+    33% {
+        background-image: url('https://images.pexels.com/photos/3738755/pexels-photo-3738755.jpeg');
+        background-position: 100% center; /* Slide to the right end */
+        filter: contrast(80%);
+    }
+    66% {
+        background-image: url('https://images.pexels.com/photos/9148569/pexels-photo-9148569.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        background-position: 0% center; /* Slide back to the left */
+        filter: contrast(80%);
+    }
+    100% {
+        background-image: url('https://images.pexels.com/photos/10296239/pexels-photo-10296239.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        background-position: 0% center; /* Start with the first image again */
+        filter: contrast(75%);
+    }
+}

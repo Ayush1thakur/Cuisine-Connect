@@ -4,32 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Food Catering Site</title>
-  <style>
-    /* Basic CSS styles, you can expand this as needed */
-    .food-item {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-    .food-item img {
-      max-width: 100px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/food.css">
+  <link rel="stylesheet" type="text/css" href="./css/header.css">
+
 </head>
 <body>
-  <h1>Food Catering Site</h1>
-  
-  <% foods.forEach(food => { %>
-    <div class="food-item">
-      <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
-      <h2><%= food.name %></h2>
-      <!-- //convert the price from string to float as jjason strinfy happened before -->
-      <p>Price: $<%= parseFloat(food.price).toFixed(2) %></p> 
-    </div>
-  <% }); %>
+  <!-- <h1>Food Catering Site</h1> -->
+  <%-include("./partial/Header");%>
+
+  <div class="motion">
+    <!-- <div><B>CuisineConnect</B></div> -->
+  </div>
+  <%-include("./menu");%>
+
+  <%-include("./partial/Footer");%>
 
 </body>
 </html>

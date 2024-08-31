@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+    <link rel='stylesheet' type='text/css'  href='./css/menu.css'>
+    <link rel="stylesheet" type="text/css" href="./css/food.css">
+    <link rel="stylesheet" type="text/css" href="./css/header.css">
+</head>
+<body>
+    <%-include("./partial/Header");%>
+
+    <% foods.forEach(food => { %>
+        <div class="food-item">
+          <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
+          <h2><%= food.name %></h2>
+          <!-- //convert the price from string to float as jjason strinfy happened before -->
+          <p>Price: $<%= parseFloat(food.price).toFixed(2) %></p> 
+        </div>
+    <% }); %>
+
+    <%-include("./partial/Footer");%>
+
+    
+</body>
+</html>
