@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/header.css">
+    <link rel='stylesheet' type='text/css'  href='./css/menu.css'>
+</head>
+<body>
+    <%-include("./partial/Header");%>
+
+    <% foods.forEach(food => { %>
+        <div class="food-item">
+          <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
+          <h2><%= food.name %></h2>
+          <!-- //convert the price from string to float as jjason strinfy happened before -->
+          <p>Price: $<%= parseFloat(food.price).toFixed(2) %></p> 
+          <form action="/cart">
+            <button type="submit" class="add-to-cart-button">+</button>
+          </form>
+        </div>
+    <% }); %>
+
+    <%-include("./partial/Footer");%>
+
+    
+</body>
+</html>
