@@ -7,9 +7,17 @@ const multer = require("multer");
 const { v4: uuidv4 } = require('uuid');
 const uuid=uuidv4();
 const methodOverride = require('method-override');
+const routerSignup = require("./routes/signUp");
+const routerLogin = require("./routes/login");
+
+app.use(express.static('public'));
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
 
 // Use method override. 
 app.use(methodOverride('_method'));
+app.use("/",routerSignup);
+app.use("/",routerLogin);
 
 
 // Set EJS as the templating engine
@@ -28,9 +36,12 @@ const storage = multer.diskStorage({
 });
 const singleUpload = multer({ storage }).single("image");
 
-app.use(express.static('public'));
-app.use(express.urlencoded({extended:false}));
-app.use(express.json());
+app.get('/login', (req,res)=>{
+   res.render('login')
+})
+app.get('/signup', (req,res)=>{
+   res.render('signup')
+})
 
 let HeaderContent=["Home","Menu","About","Contact"];
 app.get('/', (req, res) => {
