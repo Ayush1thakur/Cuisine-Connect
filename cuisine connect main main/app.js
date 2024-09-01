@@ -19,7 +19,7 @@ app.use(methodOverride('_method'));
 
 app.use('/',routersignup);
 app.use('/',routerlogin);
-// Set EJS as the templating engine
+
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
@@ -147,7 +147,8 @@ app.put("/admin/:id", (req, res, next) => {
            if (err) {
                return next(err);
            }
-           res.status(200).send({ message: "Food item updated", item: database[index] });
+         //   res.status(200).send({ message: "Food item updated", item: database[index] });
+         res.redirect('/admin?putsuccess=true');
        });
    }
 });

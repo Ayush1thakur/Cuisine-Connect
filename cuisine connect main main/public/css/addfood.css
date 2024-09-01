@@ -1,144 +1,153 @@
-/* Reset margins and paddings */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Basic body styling */
+/* General body and layout styles */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-}
-
-/* Header styling */
-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #D71313; /* Background color for header */
+    height: 100vh;
+    margin: 0;
+    background: #f7f7f7;
+    font-family: Arial, sans-serif;
+    color: #333;
 }
 
-#logo span {
+/* Sticky header styling */
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#logo {
     font-size: 24px;
     font-weight: bold;
-    color: #F8EDED;
 }
 
 #logo p {
-    color: #F8EDED;
-    margin-top: 5px;
+    margin: 0;
+    font-size: 16px;
 }
 
-/* Container styling */
+/* Container for both form and edit sections */
 .container {
-    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items: flex-start;
+    width: 100%;
+    /* max-width: 1000px; */
+    margin-top: 60px; 
+    padding: 0 20px; 
 }
 
 /* Form section styling */
-.form-section {
-    margin-bottom: 20px;
+.form-section, .edit-section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    /* width: 48%;  */
+}
+.edit-section{
+    display: flex;
+    flex: row;
+    gap: 5px;
+}
+
+h1 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 /* Form styling */
-.add-food-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-}
-
-.add-food-form label {
-    flex: 1;
-    margin-right: 10px; /* Space between label and input */
-}
-
-.add-food-form input {
-    flex: 2;
-    padding: 5px;
-    margin-right: 10px; /* Space between inputs */
-}
-
-.add-food-form button {
+.add-food-form label, .edit-form label {
     display: block;
-    width: 50%;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.add-food-form input, .edit-form input {
+    /* width: calc(100% - 22px);  */
     padding: 10px;
-    border: none;
-    color: white;
-    background-color: #D71313;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px; /* Space between inputs and button */
-}
-
-.add-food-form button:hover {
-    background-color: #b01212;
-}
-
-/* Container for food items */
-.food-container {
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
-    justify-content: center;
-    padding: 20px;
-}
-
-.food-item {
-    width: 300px;
-    margin: 10px;
+    margin-bottom: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
 }
 
-.food-item img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.food-details {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1; /* Allow this section to expand and push the button down */
-    position: relative; /* Make this a positioned element */
-}
-
-.food-item h2 {
-    font-size: 19px;
-    margin: 0;
-    text-align: left;
-    padding-left: 5px;
-    padding-bottom: 8px;
-    padding-top: 5px;
-}
-
-.food-item p {
-    font-size: 17px;
-    margin: 0;
-    color: #333;
-    text-align: left;
-    padding-left: 5px;
-    padding-bottom: 5px;
-}
-
-/* Button styling for delete */
-.delete-btn {
-    background-color: #c82333;
-    color: white;
+button {
+    background-color: #007BFF;
+    color: #fff;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
     cursor: pointer;
-    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Edit and delete button specific styles */
+.delete-btn {
+    background-color: #dc3545;
 }
 
 .delete-btn:hover {
-    background-color: #a71d2a;
+    background-color: #c82333;
+}
+
+.edit-btn {
+    background-color: #28a745;
+}
+
+.edit-btn:hover {
+    background-color: #218838;
+}
+
+/* Food item styling */
+.food-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.food-item img {
+    width: 50%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.food-item h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.food-item p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.edit-form {
+    margin-top: 15px;
 }
