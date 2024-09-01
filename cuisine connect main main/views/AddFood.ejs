@@ -46,6 +46,16 @@
                     </form>
                     <form class="edit-form" method="post" action="/admin/<%= food.id %>?_method=PUT">
                         <input type="hidden" name="_method" value="PUT">
+                        
+                        <label for="edit-name-<%= food.id %>">Name:</label>
+                        <input type="text" name="name" id="edit-name-<%= food.id %>" value="<%= food.name %>" required>
+                
+                        <label for="edit-price-<%= food.id %>">Price:</label>
+                        <input type="number" name="price" id="edit-price-<%= food.id %>" value="<%= parseFloat(food.price).toFixed(2) %>" required>
+                
+                        <label for="edit-image-<%= food.id %>">Image:</label>
+                        <input type="file" name="image" id="edit-image-<%= food.id %>">
+                        
                         <button type="submit" class="edit-btn">&#9998; Edit</button>
                     </form>
                 </div>
