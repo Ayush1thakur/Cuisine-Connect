@@ -6,6 +6,11 @@ const fooddatabase=require("./food.json");
 const multer = require("multer");
 const { v4: uuidv4 } = require('uuid');
 const uuid=uuidv4();
+const methodOverride = require('method-override');
+
+// Use method override. 
+app.use(methodOverride('_method'));
+
 
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
@@ -79,38 +84,44 @@ app.post("/admin", singleUpload, (req, res, next) => {
          if (err) {
             return next(err);
          }
-         res.status(201).send({ name: newFood.name, message: "New food item added" });
+         res.redirect('/admin?success=true');
       });
    }
 });
 
-app.delete("/adminDel/:id", (req, res, next) => {
+
+app.delete("/admin/:id", (req, res, next) => {
+   console.log("Delete route hit!");
+   console.log(req.method);
+
    let database = fooddatabase;
-   let foodId = parseInt(req.params.id); 
+   let foodId = req.params.id; 
 
    let index = database.findIndex((item) => item.id === foodId);
 
-   if (index === -1) {
+   if (index == -1) {
        return res.status(404).send({ message: "Food item not found" });
-   } else {
-       let removedItem = database.splice(index, 1);
-       fs.writeFile("./food.json", JSON.stringify(database), (err) => {
-           if (err) {
-               return next(err);
-           }
-           res.status(200).send({ message: "Food item deleted", item: removedItem[0] });
-       });
+   } 
+   else {
+      let removedItem = database.splice(index, 1);
+      fs.writeFile("./food.json", JSON.stringify(database), (err) => {
+         if (err) {
+            return next(err);
+         }
+         res.redirect('/admin?delsuccess=true');
+      });
    }
+
 });
 
 app.put("/admin/:id", (req, res, next) => {
    let database = fooddatabase;
-   let foodId = parseInt(req.params.id); 
+   let foodId = req.params.id; 
    let { name, price, image } = req.body;
 
    let index = database.findIndex((item) => item.id === foodId);
 
-   if (index === -1) {
+   if (index == -1) {
        return res.status(404).send({ message: "Food item not found" });
    } else {
        database[index] = {

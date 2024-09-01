@@ -1,29 +1,144 @@
-/* CSS for header */
-*{
-    margin
+/* Reset margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+/* Basic body styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Header styling */
 header {
-    background-color: #D71313; /* Example background color */
-    padding: 10px 20px; /* Adjust padding as needed */
-    border-bottom: 1px solid #ccc; /* Example border */
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-/* CSS for logo */
-#logo {
-    display: flex;
-    align-items: center;
+    padding: 10px 20px;
+    background-color: #D71313; /* Background color for header */
 }
 
 #logo span {
-    font-size: 1.5rem; /* Example font size */
-    font-weight: bold; /* Example font weight */
-    margin-right: 10px; /* Adjust margin as needed */
+    font-size: 24px;
+    font-weight: bold;
+    color: #F8EDED;
 }
 
 #logo p {
-    font-size: 1rem; /* Example font size */
-    color: #666; /* Example color */
+    color: #F8EDED;
+    margin-top: 5px;
+}
+
+/* Container styling */
+.container {
+    margin: 20px;
+}
+
+/* Form section styling */
+.form-section {
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.add-food-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+}
+
+.add-food-form label {
+    flex: 1;
+    margin-right: 10px; /* Space between label and input */
+}
+
+.add-food-form input {
+    flex: 2;
+    padding: 5px;
+    margin-right: 10px; /* Space between inputs */
+}
+
+.add-food-form button {
+    display: block;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    color: white;
+    background-color: #D71313;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px; /* Space between inputs and button */
+}
+
+.add-food-form button:hover {
+    background-color: #b01212;
+}
+
+/* Container for food items */
+.food-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    justify-content: center;
+    padding: 20px;
+}
+
+.food-item {
+    width: 300px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.food-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.food-details {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow this section to expand and push the button down */
+    position: relative; /* Make this a positioned element */
+}
+
+.food-item h2 {
+    font-size: 19px;
+    margin: 0;
+    text-align: left;
+    padding-left: 5px;
+    padding-bottom: 8px;
+    padding-top: 5px;
+}
+
+.food-item p {
+    font-size: 17px;
+    margin: 0;
+    color: #333;
+    text-align: left;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+/* Button styling for delete */
+.delete-btn {
+    background-color: #c82333;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #a71d2a;
 }

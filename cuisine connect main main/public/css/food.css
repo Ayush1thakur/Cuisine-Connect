@@ -6,10 +6,9 @@ body {
 
 /* Adjust the .motion styles */
 .motion {
-    top: 45px; /* Position below the header */
-    width: 100vw;
-    position: fixed; /* Fixes the element in place */
-    height: calc(100vh - 45px); /* Full height minus header height */
+    /* width: 100vw; */
+    position: relative; /* Fixes the element in place */
+    height: 100vh; /* Full height minus header height */
     animation: slide 15s ease-in-out infinite; /* Background animation */
     color: white;
     display: flex;

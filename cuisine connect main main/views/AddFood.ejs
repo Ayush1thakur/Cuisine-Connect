@@ -14,19 +14,55 @@
         </div>    
     </header>
 
-    <h1>Admin Side</h1>
+    <div class="container">
+        <div class="form-section">
+            <h1>Add Food Item</h1>
+            <form action="/admin" method="post" enctype="multipart/form-data" class="add-food-form">
+                <label for="image">Image</label>
+                <input type="file" name="image" id="image" required>
 
-    <form action="/admin" method="post" enctype="multipart/form-data">
-        <label for="image">Image</label><br>
-        <input type="file" name="image" id="image" required><br><br>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required>
 
-        <label for="name">Name</label><br>
-        <input type="text" name="name" id="name" required><br><br>
+                <label for="price">Price</label>
+                <input type="number" name="price" id="price" required>
 
-        <label for="price">Price</label><br>
-        <input type="number" name="price" id="price" required><br><br>
+                <button type="submit">Add</button>
+            </form>
+        </div>
 
-        <button type="submit">Add</button>
-    </form>
+
+
+        <div class="edit-section">
+            <h1>Edit Food Item</h1>
+            <% foods.forEach(food => { %>
+                <div class="food-item">
+                    <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
+                    <h2><%= food.name %></h2>
+                    <p>Price: $<%= parseFloat(food.price).toFixed(2) %></p>
+                    <form method="post" action="/admin/<%= food.id %>?_method=DELETE" style="display:inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                    <form class="edit-form" method="post" action="/admin/<%= food.id %>?_method=PUT">
+                        <input type="hidden" name="_method" value="PUT">
+                        <button type="submit" class="edit-btn">&#9998; Edit</button>
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                alert('Food item added  successful!');
+            }
+            if (urlParams.get('delsuccess') === 'true') {
+                alert('Food item Deleted successful!');
+            }
+        });
+    </script>
 </body>
 </html>
