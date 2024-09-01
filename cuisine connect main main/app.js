@@ -28,6 +28,10 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
 let HeaderContent=["Home","Menu","About","Contact"];
+app.get('/', (req, res) => {
+   res.render('food', { foods: fooddatabase, header:HeaderContent});
+});
+
 app.get('/Home', (req, res) => {
    res.render('food', { foods: fooddatabase, header:HeaderContent});
 });
@@ -38,7 +42,7 @@ app.get('/Menu', (req, res) => {
 
 
 app.get("/admin", (req, res) => {
-   res.render('AddFood');
+   res.render('AddFood',{ foods: fooddatabase, });
 });
 
 // get menu

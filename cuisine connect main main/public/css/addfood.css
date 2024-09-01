@@ -1,0 +1,29 @@
+/* CSS for header */
+*{
+    margin
+}
+header {
+    background-color: #D71313; /* Example background color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-bottom: 1px solid #ccc; /* Example border */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* CSS for logo */
+#logo {
+    display: flex;
+    align-items: center;
+}
+
+#logo span {
+    font-size: 1.5rem; /* Example font size */
+    font-weight: bold; /* Example font weight */
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+#logo p {
+    font-size: 1rem; /* Example font size */
+    color: #666; /* Example color */
+}
