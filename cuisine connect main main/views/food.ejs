@@ -1,103 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Side</title>
-    <link rel="stylesheet" type="text/css" href="./css/addfood.css">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Catering Site</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/food.css">
+  <link rel="stylesheet" type="text/css" href="./css/header.css">
+  <link rel="stylesheet" href="./css/footer.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./css/menu.css"> -->
+
+
 </head>
-
 <body>
-    <header>
-        <div id="logo">
-            <a style="cursor: pointer; text-decoration: none; color: #fff;" href="/">CuisineConnect</a>
-            <p>Admin Panel</p>
-        </div>
-    </header>
+  <!-- <h1>Food Catering Site</h1> -->
+  <%-include("./partial/Header");%>
 
-    <div class="container">
-        <div class="form-section">
-            <h1>Add Food Item</h1>
-            <form action="/admin" method="post" enctype="multipart/form-data" class="add-food-form">
-                <label for="image">Image</label>
-                <input type="file" name="image" id="image" required>
+  <div class="motion">
+    <!-- <div><B>CuisineConnect</B></div> -->
+  </div>
 
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" required>
+  <!-- <div class="food-container">
+    <% foods.forEach(food => { %>
+      <div class="food-item">
+        <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
+        <h2><%= food.name %></h2>
+        <p>Price: $<%= parseFloat(food.price).toFixed(2) %></p> 
+        <form action="/cart">
+          <button type="submit" class="add-to-cart-button">+</button>
+        </form>
+      </div>
+    <% }); %>
+  </div> -->
 
-                <label for="price">Price</label>
-                <input type="number" name="price" id="price" required>
+  <%-include("./partial/Footer");%>
 
-                <button type="submit">Add</button>
-            </form>
-        </div>
-
-        <div class="edit-section">
-            <div>
-                <h1>Edit Food Item</h1>
-            </div>
-            <div class="foodcont">
-                <% foods.forEach(food => { %>
-                    <div class="food-item">
-                        <div>
-                            <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
-                            <h2><%= food.name %></h2>
-                        </div>
-                        <div>
-                            <p>Price: Rs.<%= parseFloat(food.price).toFixed(2) %></p>
-                        </div>
-                        <div class="delete-btn">
-                            <form method="post" action="/admin/<%= food.id %>?_method=DELETE" style="display:inline;">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="delete-btn">Delete</button>
-                            </form>
-                        </div>
-        
-                        <form class="edit-form" method="post" action="/admin/<%= food.id %>?_method=PUT">
-                            <div>
-                                <input type="hidden" name="_method" value="PUT">
-                            </div>
-        
-                            <div>
-                                <label for="edit-name-<%= food.id %>">Name:</label>
-                                <input type="text" name="name" id="edit-name-<%= food.id %>" value="<%= food.name %>" required>
-                            </div>
-        
-                            <div>
-                                <label for="edit-price-<%= food.id %>">Price:</label>
-                                <input type="number" name="price" id="edit-price-<%= food.id %>" value="<%= parseFloat(food.price).toFixed(2) %>" required>
-                            </div>
-        
-                            <div>
-                                <label for="edit-image-<%= food.id %>">Image:</label>
-                                <input class="imaginpt" type="file" name="image" id="edit-image-<%= food.id %>">
-                            </div>
-                            <div>
-                                <button type="submit" class="edit-btn">&#9998;   Edit</button>
-                            </div>
-                        </form>
-                    </div>
-                    <% }); %>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('success') === 'true') {
-                alert('Food item added successfully!');
-            }
-            if (urlParams.get('delsuccess') === 'true') {
-                alert('Food item deleted successfully!');
-            }
-            if (urlParams.get('putsuccess') === 'true') {
-                alert('Food item updated successfully!');
-            } 
-        });
-    </script>
 </body>
-
 </html>
