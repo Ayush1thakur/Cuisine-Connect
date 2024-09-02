@@ -17,9 +17,9 @@ body {
     width: 300px;
     margin: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     position: relative;
@@ -33,6 +33,7 @@ body {
 }
 
 .food-details {
+    background-color: #2c0f0f;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -44,9 +45,9 @@ body {
     font-size: 19px;
     margin: 0;
     text-align: left;
-    padding-left: 5px;
-    padding-bottom: 8px;
-    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 15px;
 }
 
 .food-item p {
@@ -54,18 +55,18 @@ body {
     margin: 0;
     color: #333;
     text-align: left;
-    padding-left: 5px;
-    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 .add-to-cart-button {
     position: absolute; /* Absolute positioning */
-    bottom: 3px; /* Position it 10px from the bottom */
-    right: 10px; /* Position it 10px from the right */
+    bottom: 12px; /* Position it 10px from the bottom */
+    right: 15px; /* Position it 10px from the right */
     background-color: #28a745;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
