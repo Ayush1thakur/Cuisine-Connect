@@ -38,47 +38,49 @@
             <div>
                 <h1>Edit Food Item</h1>
             </div>
-            <% foods.forEach(food => { %>
-            <div class="food-item">
-                <div>
-                    <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
-                    <h2><%= food.name %></h2>
-                </div>
-                <div>
-                    <p>Price: Rs.<%= parseFloat(food.price).toFixed(2) %></p>
-                </div>
-                <div style="margin-top: 25px;">
-                    <form method="post" action="/admin/<%= food.id %>?_method=DELETE" style="display:inline;">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="delete-btn">Delete</button>
-                    </form>
-                </div>
-
-                <form class="edit-form" method="post" action="/admin/<%= food.id %>?_method=PUT">
-                    <div>
-                        <input type="hidden" name="_method" value="PUT">
+            <div class="foodcont">
+                <% foods.forEach(food => { %>
+                    <div class="food-item">
+                        <div>
+                            <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
+                            <h2><%= food.name %></h2>
+                        </div>
+                        <div>
+                            <p>Price: Rs.<%= parseFloat(food.price).toFixed(2) %></p>
+                        </div>
+                        <div class="delete-btn">
+                            <form method="post" action="/admin/<%= food.id %>?_method=DELETE" style="display:inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                        </div>
+        
+                        <form class="edit-form" method="post" action="/admin/<%= food.id %>?_method=PUT">
+                            <div>
+                                <input type="hidden" name="_method" value="PUT">
+                            </div>
+        
+                            <div>
+                                <label for="edit-name-<%= food.id %>">Name:</label>
+                                <input type="text" name="name" id="edit-name-<%= food.id %>" value="<%= food.name %>" required>
+                            </div>
+        
+                            <div>
+                                <label for="edit-price-<%= food.id %>">Price:</label>
+                                <input type="number" name="price" id="edit-price-<%= food.id %>" value="<%= parseFloat(food.price).toFixed(2) %>" required>
+                            </div>
+        
+                            <div>
+                                <label for="edit-image-<%= food.id %>">Image:</label>
+                                <input class="imaginpt" type="file" name="image" id="edit-image-<%= food.id %>">
+                            </div>
+                            <div>
+                                <button type="submit" class="edit-btn">&#9998;   Edit</button>
+                            </div>
+                        </form>
                     </div>
-
-                    <div>
-                        <label for="edit-name-<%= food.id %>">Name:</label>
-                        <input type="text" name="name" id="edit-name-<%= food.id %>" value="<%= food.name %>" required>
-                    </div>
-
-                    <div>
-                        <label for="edit-price-<%= food.id %>">Price:</label>
-                        <input type="number" name="price" id="edit-price-<%= food.id %>" value="<%= parseFloat(food.price).toFixed(2) %>" required>
-                    </div>
-
-                    <div>
-                        <label for="edit-image-<%= food.id %>">Image:</label>
-                        <input type="file" name="image" id="edit-image-<%= food.id %>">
-                    </div>
-                    <div>
-                        <button type="submit" class="edit-btn">&#9998; Edit</button>
-                    </div>
-                </form>
+                    <% }); %>
             </div>
-            <% }); %>
         </div>
     </div>
 
