@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Side</title>
     <link rel="stylesheet" type="text/css" href="./css/addfood.css">
+    
 </head>
 
 <body>
     <header>
         <div id="logo">
-            <span>CuisineConnect</span>
+            <a style="cursor: pointer; text-decoration: none; color: #fff;" href="/">CuisineConnect</a>
             <p>Admin Panel</p>
         </div>
     </header>
@@ -44,7 +45,7 @@
                     <h2><%= food.name %></h2>
                 </div>
                 <div>
-                    <p>Price: $<%= parseFloat(food.price).toFixed(2) %></p>
+                    <p>Price: Rs.<%= parseFloat(food.price).toFixed(2) %></p>
                 </div>
                 <div style="margin-top: 25px;">
                     <form method="post" action="/admin/<%= food.id %>?_method=DELETE" style="display:inline;">

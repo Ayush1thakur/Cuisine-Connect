@@ -23,10 +23,9 @@ app.use('/',routerlogin);
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-// Middleware configuration for multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "public/FoodImage/"); // Ensure this folder exists
+        cb(null, "public/FoodImage/"); 
     },
     filename: (req, file, cb) => {
         const filename = file.originalname.replace(/\s+/g, "-");
@@ -43,7 +42,6 @@ app.get('/signup',(req,res)=>{
    res.render('signup');
 })
 
-
 let HeaderContent=["Home","Menu","About","Contact"];
 app.get('/', (req, res) => {
    res.render('food', { foods: fooddatabase, header:HeaderContent});
@@ -57,9 +55,16 @@ app.get('/Menu', (req, res) => {
    res.render('menu', { foods: fooddatabase, header:HeaderContent});
 });
 
+app.get('/contact',(req,res)=> {
+   res.render('contact', {header:HeaderContent});
+})
+
+app.get('/about',(req,res)=> {
+   res.render('about', {header:HeaderContent});
+})
 
 app.get("/admin", (req, res) => {
-   res.render('AddFood',{ foods: fooddatabase, });
+   res.render('AddFood',{ foods: fooddatabase,});
 });
 
 // get menu
@@ -155,7 +160,7 @@ app.put("/admin/:id", (req, res, next) => {
 
 app.patch("/admin/:id", (req, res, next) => {
    let database = fooddatabase;
-   let foodId = req.params.id;  // Use UUID (string) instead of parseInt
+   let foodId = req.params.id; 
    let { name, price, image } = req.body;
 
    let index = database.findIndex((item) => item.id === foodId);
@@ -163,8 +168,8 @@ app.patch("/admin/:id", (req, res, next) => {
    if (index === -1) {
        return res.status(404).send({ message: "Food item not found" });
    } else {
-       // Only update the fields that are provided in the request body
-       if (name) database[index].name = name;
+
+      if (name) database[index].name = name;
        if (price) database[index].price = price;
        if (image) database[index].image = image;
 
@@ -184,6 +189,6 @@ app.listen(PORT, (err) => {
       console.log(err);
    }
    else{
-      console.log(`Server running at:- http://localhost:${PORT}`);
+      console.log(`Server running at:- http://localhost:${PORT}/login`);
    }
 });
