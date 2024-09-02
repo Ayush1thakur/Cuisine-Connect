@@ -10,17 +10,19 @@
 <body>
     <%-include("./partial/Header");%>
 
-    <% foods.forEach(food => { %>
-        <div class="food-item">
-          <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
-          <h2><%= food.name %></h2>
-          <!-- //convert the price from string to float as jjason strinfy happened before -->
-          <p>Price: Rs.<%= parseFloat(food.price).toFixed(2) %></p> 
-          <form action="/cart">
-            <button type="submit" class="add-to-cart-button">+</button>
-          </form>
-        </div>
-    <% }); %>
+    <div class="food-container">
+      <% foods.forEach(food => { %>
+          <div class="food-item">
+            <img src="/FoodImage/<%= food.image %>" alt="<%= food.name %>">
+            <h2><%= food.name %></h2>
+            <!-- //convert the price from string to float as jjason strinfy happened before -->
+            <p>Price: Rs.<%= parseFloat(food.price).toFixed(2) %></p> 
+            <form action="/cart">
+              <button type="submit" class="add-to-cart-button">+</button>
+            </form>
+          </div>
+      <% }); %>
+  </div>
 
     <%-include("./partial/Footer");%>
 

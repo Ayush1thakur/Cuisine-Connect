@@ -108,9 +108,6 @@ app.post("/admin", singleUpload, (req, res, next) => {
 
 
 app.delete("/admin/:id", (req, res, next) => {
-   console.log("Delete route hit!");
-   console.log(req.method);
-
    let database = fooddatabase;
    let foodId = req.params.id; 
 

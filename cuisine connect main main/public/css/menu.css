@@ -23,6 +23,7 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
+    cursor: pointer;
 }
 
 .food-item img {
@@ -76,3 +77,4 @@ body {
 .add-to-cart-button:hover {
     background-color: #218838;
 }
+

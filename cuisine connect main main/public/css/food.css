@@ -27,7 +27,7 @@ body {
 .food-container {
     padding: 20px;
     margin-top: calc(45px + 20px); /* Ensure it starts below the .motion section */
-    position: relative; /* Normal flow positioning */
+    position: absolute; /* Normal flow positioning */
     z-index: 0; /* Default z-index, lower than .motion */
 }
 
