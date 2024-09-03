@@ -7,8 +7,15 @@ const multer = require("multer");
 const { v4: uuidv4 } = require('uuid');
 const uuid=uuidv4();
 const methodOverride = require('method-override');
+const session = require('express-session');
 const routersignup=require("./routes/signUp");
 const routerlogin=require("./routes/login")
+
+app.use(session({
+   secret: 'cuisine123',
+   resave: false,
+   saveUninitialized: true,
+}));
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:false}));
@@ -19,6 +26,7 @@ app.use(methodOverride('_method'));
 
 app.use('/',routersignup);
 app.use('/',routerlogin);
+
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -38,33 +46,48 @@ app.get('/login',(req,res)=>{
    res.render('login');
 })
 
+app.get('/logout', (req, res) => {
+   req.session.destroy((err) => {
+       if (err) {
+           return res.status(500).send("Unable to log out.");
+       }
+       res.redirect('/');
+   });
+});
+
 app.get('/signup',(req,res)=>{
    res.render('signup');
 })
 
 let HeaderContent=["Home","Menu","About","Contact"];
 app.get('/', (req, res) => {
-   res.render('food', { foods: fooddatabase, header:HeaderContent});
+   const user = req.session.user; // Get user info from session
+   res.render('food', { foods: fooddatabase, header: HeaderContent, user });
 });
 
 app.get('/Home', (req, res) => {
-   res.render('food', { foods: fooddatabase, header:HeaderContent});
+   const user = req.session.user; // Get user info from session
+   res.render('food', { foods: fooddatabase, header: HeaderContent, user });
 });
 
 app.get('/Menu', (req, res) => {
-   res.render('menu', { foods: fooddatabase, header:HeaderContent});
+   const user = req.session.user;
+   res.render('menu', { foods: fooddatabase, header:HeaderContent,user});
 });
 
 app.get('/contact',(req,res)=> {
-   res.render('contact', {header:HeaderContent});
+   const user = req.session.user;
+   res.render('contact', {header:HeaderContent,user});
 })
 
 app.get('/about',(req,res)=> {
-   res.render('about', {header:HeaderContent});
+   const user = req.session.user;
+   res.render('about', {header:HeaderContent,user});
 })
 
 app.get("/admin", (req, res) => {
-   res.render('AddFood',{ foods: fooddatabase,});
+   const user = req.session.user;
+   res.render('AddFood',{ foods: fooddatabase,user});
 });
 
 // get menu
@@ -155,29 +178,6 @@ app.put("/admin/:id", (req, res, next) => {
    }
 });
 
-app.patch("/admin/:id", (req, res, next) => {
-   let database = fooddatabase;
-   let foodId = req.params.id; 
-   let { name, price, image } = req.body;
-
-   let index = database.findIndex((item) => item.id === foodId);
-
-   if (index === -1) {
-       return res.status(404).send({ message: "Food item not found" });
-   } else {
-
-      if (name) database[index].name = name;
-       if (price) database[index].price = price;
-       if (image) database[index].image = image;
-
-       fs.writeFile("./food.json", JSON.stringify(database), (err) => {
-           if (err) {
-               return next(err);
-           }
-           res.status(200).send({ message: "Food item updated", item: database[index] });
-       });
-   }
-});
 
  
 const PORT = 1000;

@@ -10,13 +10,12 @@
     </div>
 
     <div id="icons">
-        <a href="/search" class="icon">
-            <i class="fas fa-search"></i>
-        </a>
-        <a href="/cart" class="icon">
-            <i class="fas fa-shopping-cart"></i>
-        </a>
-        <a href="/signup" id="signup">Sign Up</a>
+        <% if (user) { %>
+            <span class="user-greeting">Hello, <%= user.name %></span>
+            <button class="same"><a href="/logout" id="logout">Logout</a></button>
+        <% } else { %>
+            <button class="same"><a href="/signup" id="signup">Sign Up</a></button>
+        <% } %>
     </div>
 </header>
 
