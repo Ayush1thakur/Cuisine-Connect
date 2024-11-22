@@ -1,0 +1,21 @@
+<header>
+    <div id="logo">
+        <span>CuisineConnect</span>
+    </div>
+    
+    <div id="header">
+        <% for(let i = 0; i < header.length; i++) { %>
+            <a href="<%= header[i] %>"><%= header[i] %></a>
+        <% } %>
+    </div>
+
+    <div id="icons">
+        <% if (user) { %>
+            <span class="user-greeting">Hello, <%= user.name %></span>
+            <button class="same"><a href="/logout" id="logout">Logout</a></button>
+        <% } else { %>
+            <button class="same"><a href="/signup" id="signup">Sign Up</a></button>
+        <% } %>
+    </div>
+</header>
+

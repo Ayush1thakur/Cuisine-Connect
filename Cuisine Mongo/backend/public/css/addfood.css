@@ -1,0 +1,243 @@
+/* General body and layout styles */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #f7f7f7;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Sticky header styling */
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: #333;
+    color: #fff;
+    padding: 10px 0px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#logo p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Container for both form and edit sections */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    /* max-width: 1000px; */
+    margin-top: 60px; 
+}
+
+/* Form section styling */
+.form-section, .edit-section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    /* width: 48%;  */
+}
+.form-section{
+    background-color: #FAF9F6;
+    border: 1px solid rgba(0, 0, 0, 0.324);
+
+}
+.edit-section{
+    width: 100%;
+    display: flex;
+    flex: row;
+    gap: 5px;
+}
+
+h1 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.foodcont{
+    padding: 10px;
+    display: flex;
+    gap:0px 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+/* Form styling */
+.add-food-form label, .edit-form label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.add-food-form input, .edit-form input {
+    /* width: calc(100% - 22px);  */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Edit and delete button specific styles */
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.edit-btn {
+    background-color: #28a745;
+}
+
+.edit-btn:hover {
+    background-color: #218838;
+}
+
+.edit-section {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    justify-content: center;
+    padding: 20px;
+}
+/* Food item styling */
+.food-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FAF9F6;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.208);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* padding: 25px 15px; */
+    padding-top: 25px;
+    margin: 10px 0;
+    width:45%;
+    text-align: center;
+    position: relative;
+}
+
+.food-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.food-item h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.food-item p {
+    font-size: 16px;
+    margin: 0px 0 5px;
+}
+
+.edit-form {
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
+/* From Uiverse.io by liyaxu123 */ 
+.form-control {
+    margin: 20px 0 40px;
+    width: 190px;
+}
+
+.form-control input {
+background-color: transparent;
+border: 0;
+border-bottom: 2px #fff solid;
+display: block;
+width: 100%;
+padding: 15px 0;
+font-size: 18px;
+color: #fff;
+}
+
+.form-control input:focus,
+.form-control input:valid {
+outline: 0;
+border-bottom-color: lightblue;
+}
+
+.form-control label {
+position: absolute;
+top: 15px;
+left: 0;
+pointer-events: none;
+}
+
+.form-control label span {
+display: inline-block;
+font-size: 18px;
+min-width: 5px;
+color: #fff;
+transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control input:focus+label span,
+.form-control input:valid+label span {
+color: lightblue;
+transform: translateY(-30px);
+}
+
+.imaginpt{
+    width: 80%;
+}
+
+.edit-btn{
+    margin-top: 10px;
+    padding: 8.5px 15px;
+    border-radius: 10px;
+    position: absolute;
+    right: 23%;
+    bottom: 4%;
+}
+
+.delete-btn{
+    position: absolute;
+    border-radius: 10px;
+    left: 23%;
+    bottom: 4%;
+}
+
+
