@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+</head>
+<body>
+    <%- include("./partial/Header"); %>
+
+    <h1>Your Cart</h1>
+    <div class="cart-container">
+      <% cartItems.forEach(item => { %> 
+          <div class="cart-item">
+            <h3>Product: <%= item.product.name %></h3> 
+            <p>Quantity: <%= item.quantity %></p>
+            <p>Price: Rs. <%= (item.product.price * item.quantity).toFixed(2) %></p>
+            <form action="/cart/remove" method="POST">
+              <input type="hidden" name="cartItemId" value="<%= item._id %>">
+              <button type="submit" class="remove-from-cart">Remove</button>
+            </form>
+          </div>
+      <% }); %>
+    </div>
+
+    <%- include("./partial/Footer"); %>
+</body>
+</html>

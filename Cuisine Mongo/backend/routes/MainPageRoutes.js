@@ -58,5 +58,18 @@ router.get('/about', (req, res) => {
     res.render('about', { header: HeaderContent, user });
 });
 
+// Route to handle checkout
+router.post('/checkout', (req, res) => {
+    const cart = req.session.cart || [];
+    if (cart.length === 0) {
+        return res.redirect('/menu');
+    }
+
+    // Process the checkout (this is a placeholder, you could integrate with payment systems)
+    req.session.cart = [];  // Clear the cart after checkout
+    res.render('checkout', { header: HeaderContent, message: 'Checkout successful!' });
+});
+
+
 
 module.exports = router;
