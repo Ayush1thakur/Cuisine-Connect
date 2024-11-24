@@ -1,40 +1,41 @@
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/Product');  
-const { CreateError } = require('../middlewares/ErrorHandling');  
+const Product = require('../models/Product');
+const { CreateError } = require('../middlewares/ErrorHandling');
+const handleToken = require('../middlewares/validToken'); 
 
 const HeaderContent = ["Home", "Menu", "About", "Contact"];
 
-router.get('/', async (req, res, next) => {
-    const user = req.session.user;  // Get user info from session
+router.get('/', handleToken, async (req, res, next) => {
+    const user = req.user || null; 
     try {
-        const products = await Product.find();  // Get all products from the database
+        const products = await Product.find(); 
         if (!products) {
             return next(CreateError(404, 'No products found.'));
         }
         res.render('food', { foods: products, header: HeaderContent, user });
     } catch (err) {
-        next(err);  // Pass any error to the error handling middleware
+        next(err); 
     }
 });
 
-// Route for the Home page
-router.get('/Home', async (req, res, next) => {
-    const user = req.session.user;  
+// Route for the Home page - accessible to all users, with token validation
+router.get('/home', handleToken, async (req, res, next) => {
+    const user = req.user || null; // If no token, user will be null
     try {
-        const products = await Product.find();  
+        const products = await Product.find(); 
         if (!products) {
             return next(CreateError(404, 'No products found.'));
         }
         res.render('food', { foods: products, header: HeaderContent, user });
     } catch (err) {
-        next(err);  
+        next(err); 
     }
 });
 
-// Route for the Menu page
-router.get('/Menu', async (req, res, next) => {
-    const user = req.session.user;
+// Route for the Menu / contact /about page - protected route, only accessible with token
+router.get('/Menu', handleToken, async (req, res, next) => {
+    const user = req.user; // Attach user data
     try {
         const products = await Product.find(); 
         if (!products) {
@@ -42,34 +43,22 @@ router.get('/Menu', async (req, res, next) => {
         }
         res.render('menu', { foods: products, header: HeaderContent, user });
     } catch (err) {
-        next(err);  
+        next(err); 
     }
 });
 
-// Route for the Contact page
-router.get('/contact', (req, res) => {
-    const user = req.session.user;
+router.get('/contact', handleToken, (req, res) => {
+    const user = req.user; 
     res.render('contact', { header: HeaderContent, user });
 });
 
-// Route for the About page
-router.get('/about', (req, res) => {
-    const user = req.session.user;
+router.get('/about', handleToken, (req, res) => {
+    const user = req.user; 
     res.render('about', { header: HeaderContent, user });
 });
 
-// Route to handle checkout
-router.post('/checkout', (req, res) => {
-    const cart = req.session.cart || [];
-    if (cart.length === 0) {
-        return res.redirect('/menu');
-    }
-
-    // Process the checkout (this is a placeholder, you could integrate with payment systems)
-    req.session.cart = [];  // Clear the cart after checkout
-    res.render('checkout', { header: HeaderContent, message: 'Checkout successful!' });
+router.get('/login', (req, res) => {
+    res.render('login'); 
 });
-
-
 
 module.exports = router;

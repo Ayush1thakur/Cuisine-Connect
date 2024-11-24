@@ -10,9 +10,14 @@ const validatecred = async (req, res, next) => {
 
     try {
         const existingUser = await User.findOne({ email });
-        if (existingUser) {
+        if (existingUser ) {
             return next(CreateError(406, "User already present"));
-        }
+        }        
+        if (email=="admin@cuisine.org" ) {
+            return next(CreateError(406, "email usage not allowed"));
+        } 
+
+        
         const newUser = new User({
             name,
             email,

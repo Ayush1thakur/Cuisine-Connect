@@ -4,20 +4,24 @@ const Product = require('../models/Product');
 const { singleUpload } = require('../middlewares/FileUpload');  
 const { v4: uuidv4 } = require('uuid');
 const methodOverride = require('method-override');
+const isadmin=require('../middlewares/isAdmin');
 
 router.use(methodOverride('_method'));
 
-router.get("/admin", async (req, res, next) => {
-   const user = req.session.user;  
-   try {
-       const products = await Product.find();  
-       res.render('AddFood', { foods: products, user });
-   } catch (err) {
-       next(err);
-   }
+router.get("/admin", isadmin, async (req, res, next) => {
+    try {
+        const user = req.user;  
+
+        const products = await Product.find();  
+
+        res.render('AddFood', { foods: products, user });
+    } catch (err) {
+        next(err);
+    }
 });
 
-router.post("/admin", singleUpload, async (req, res, next) => {
+
+router.post("/admin", isadmin, singleUpload, async (req, res, next) => {
    if (!req.file) {
       return res.status(400).send({ message: "No file uploaded" });
    }
@@ -55,7 +59,7 @@ router.post("/admin", singleUpload, async (req, res, next) => {
    }
 });
 
-router.delete("/admin/:id", async (req, res, next) => {
+router.delete("/admin/:id", isadmin, async (req, res, next) => {
    const productId = req.params.id;
 
    try {
@@ -74,7 +78,7 @@ router.delete("/admin/:id", async (req, res, next) => {
 });
 
 
-router.put('/admin/:id', singleUpload, async (req, res, next) => {
+router.put('/admin/:id', isadmin, singleUpload, async (req, res, next) => {
     const productId = req.params.id;
     const { name, price } = req.body;
 

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid');  
+const { v4: uuidv4 } = require('uuid');  // Import UUID package
 
 const productSchema = new mongoose.Schema({
   id: {
     type: String,
-    default: uuidv4,  
-    unique: false,
+    default: uuidv4,  // Automatically generate an ID if not provided
+    unique: true,
   },
   name: {
     type: String,
