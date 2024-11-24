@@ -43,10 +43,10 @@ router.post('/login', userpresent, authenticateuser, (req, res, next) => {
         });
 
         if(user.isAdmin){
-            res.redirect('/admin');
+            return res.redirect('/admin');
         }
 
-        res.redirect("/Home"); // Redirect after login success
+        return res.redirect("/Home"); // Redirect after login success
     } catch (err) {
         next(err);  // Handle errors gracefully
     }
