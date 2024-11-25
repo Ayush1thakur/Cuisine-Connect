@@ -38,7 +38,8 @@ router.post('/login', userpresent, authenticateuser, (req, res, next) => {
         // Send the token as a cookie
         res.cookie('token', token, { 
             httpOnly: true, 
-            secure: process.env.NODE_ENV === 'production', 
+            sameSite: "Strict", // Prevent CSRF
+            secure: process.env.NODE_ENV === 'development', 
             maxAge: 3600000  // 1 hour expiration
         });
 
