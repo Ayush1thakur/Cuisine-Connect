@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Cart = require('../models/Cart');
 const User = require('../models/User');
+const stripe = require('../middlewares/Stripe'); // Import Stripe
 const handleToken = require('../middlewares/validToken');
 const { CreateError } = require('../middlewares/ErrorHandling');
 
@@ -166,41 +167,74 @@ router.post('/cart/decrement', handleToken, async (req, res, next) => {
 
 
 
-// // routes/cartRoutes.js
-// router.post('/cart/update', handleToken, async (req, res, next) => {
-//     const { foodName, action } = req.body;
-//     const user = req.user; // User info from token
+router.get('/checkout', handleToken, async (req, res, next) => {
+    const user = req.user; // User from the token
 
-//     try {
-//         let cart = await Cart.findOne({ user: user.userId });
+    try {
+        // Fetch user's cart
+        const cart = await Cart.findOne({ user: user.userId });
 
-//         if (!cart) {
-//             return next(CreateError(404, 'Cart not found.'));
-//         }
+        if (!cart || cart.items.length === 0) {
+            return res.redirect('/cart'); // Redirect to cart if no items
+        }
 
-//         const item = cart.items.find(item => item.foodName === foodName);
-//         if (!item) {
-//             return next(CreateError(404, 'Item not found in cart.'));
-//         }
+        // Create line items for Stripe
+        const lineItems = cart.items.map(item => ({
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: item.foodName,
+                },
+                unit_amount: Math.round(item.price * 100), // Convert to cents
+            },
+            quantity: item.quantity,
+        }));
 
-//         // Increment or decrement the quantity
-//         if (action === 'increment') {
-//             item.quantity += 1;
-//         } else if (action === 'decrement' && item.quantity > 1) {
-//             item.quantity -= 1;
-//         }
+        // Create a Stripe session
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            mode: 'payment',
+            line_items: lineItems,
+            success_url: `${req.protocol}://${req.get('host')}/success`,
+            cancel_url: `${req.protocol}://${req.get('host')}/cart`,
+            customer_email: user.email, // Add user email if available
+        });
 
-//         // Recalculate the total price
-//         cart.totalPrice = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+        try {
+            // Find the user's cart
+            const cart = await Cart.findOne({ user: user.userId });
+    
+            if (cart) {
+                // Empty the cart
+                cart.items = [];
+                cart.totalPrice = 0;
+    
+                // Save the updated cart
+                await cart.save();
+            }
+        } catch (error) {
+            next(error); // Handle any errors
+        }
+        // Redirect to Stripe Checkout
+        res.redirect(session.url);
+    } catch (error) {
+        next(error);
+    }
+});
 
-//         // Save the updated cart
-//         await cart.save();
+router.get('/success',async (req, res, next) => {
+    
 
-//         res.redirect('/cart');
-//     } catch (err) {
-//         next(err);
-//     }
-// });
+        // Render the success page
+    res.render('success');
+
+});
+
+
+router.get('/cancel', handleToken, (req, res) => {
+    res.redirect('/cart');
+});
+
 
 
 module.exports = router;
