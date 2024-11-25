@@ -6,7 +6,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 40px;
+    padding: 10px 20px;
     background-color: #1c1c1c; /* Example background color */
 }
 
@@ -90,3 +90,20 @@ header {
     margin-right: 20px; /* Space between greeting and button */
 }
 
+#icons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Spacing between icons and buttons */
+}
+
+#cart-icon {
+    color: #fff; /* Cart icon color */
+    font-size: 20px; /* Adjust size */
+    text-decoration: none; /* Remove underline */
+    margin: 0 10px; /* Spacing around the icon */
+    cursor: pointer;
+}
+
+#cart-icon:hover {
+    color: #ff4d4d; /* Change color on hover */
+}

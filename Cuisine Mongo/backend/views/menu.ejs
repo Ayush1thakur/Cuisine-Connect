@@ -17,9 +17,12 @@
             <h2><%= food.name %></h2>
             <!-- //convert the price from string to float as jjason strinfy happened before -->
             <p>Price: Rs.<%= parseFloat(food.price).toFixed(2) %></p> 
-            <form action="/cart">
+            <form action="/cart" method="POST">
+              <input type="hidden" name="foodName" value="<%= food.name %>">
+              <input type="hidden" name="price" value="<%= food.price %>">
+              <input type="hidden" name="quantity" value="1" min="1" class="quantity-input">
               <button type="submit" class="add-to-cart-button">+</button>
-            </form>
+          </form>
           </div>
       <% }); %>
   </div>

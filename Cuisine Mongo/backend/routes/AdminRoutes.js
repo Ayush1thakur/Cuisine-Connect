@@ -2,25 +2,23 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');  
 const { singleUpload } = require('../middlewares/FileUpload');  
-const { v4: uuidv4 } = require('uuid');
 const methodOverride = require('method-override');
-const isadmin=require('../middlewares/isAdmin');
+const isadmin = require('../middlewares/isAdmin');
 
 router.use(methodOverride('_method'));
 
+// Get all products for admin panel
 router.get("/admin", isadmin, async (req, res, next) => {
     try {
         const user = req.user;  
-
         const products = await Product.find();  
-
         res.render('AddFood', { foods: products, user });
     } catch (err) {
         next(err);
     }
 });
 
-
+// Add a new product
 router.post("/admin", isadmin, singleUpload, async (req, res, next) => {
    if (!req.file) {
       return res.status(400).send({ message: "No file uploaded" });
@@ -40,7 +38,6 @@ router.post("/admin", isadmin, singleUpload, async (req, res, next) => {
        }
 
        const newProduct = new Product({
-           id: uuidv4(),  
            name,
            price,
            image,  
@@ -50,7 +47,7 @@ router.post("/admin", isadmin, singleUpload, async (req, res, next) => {
 
        res.status(201).send(`
         <script>
-            alert('Food Item  is added successfully');
+            alert('Food Item is added successfully');
             window.location.href = "/admin"; // Redirect to admin page
         </script>
     `);
@@ -59,11 +56,12 @@ router.post("/admin", isadmin, singleUpload, async (req, res, next) => {
    }
 });
 
+// Delete a product by _id
 router.delete("/admin/:id", isadmin, async (req, res, next) => {
    const productId = req.params.id;
 
    try {
-       const product = await Product.findOneAndDelete({ id: productId });
+       const product = await Product.findByIdAndDelete(productId);
 
        res.status(201).send(`
         <script>
@@ -77,13 +75,13 @@ router.delete("/admin/:id", isadmin, async (req, res, next) => {
    }
 });
 
-
+// Update product by _id
 router.put('/admin/:id', isadmin, singleUpload, async (req, res, next) => {
     const productId = req.params.id;
     const { name, price } = req.body;
 
     try {
-        const product = await Product.findOne({ id: productId });
+        const product = await Product.findById(productId);
 
         // Update product details
         product.name = name || product.name;
@@ -91,12 +89,10 @@ router.put('/admin/:id', isadmin, singleUpload, async (req, res, next) => {
 
         // Update image path
         if (req.file) {
-            product.image = `${req.file.filename}`;
+            product.image = req.file.filename;
         }
 
         await product.save();
-        console.log('Uploaded file:', req.file);
-
 
         res.status(201).send(`
             <script>
@@ -108,6 +104,5 @@ router.put('/admin/:id', isadmin, singleUpload, async (req, res, next) => {
         next(err);
     }
 });
-
 
 module.exports = router;

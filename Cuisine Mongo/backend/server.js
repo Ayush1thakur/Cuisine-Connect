@@ -10,6 +10,7 @@ const foodRoutes = require('./routes/MainPageRoutes');
 const AuthRoutes = require('./routes/AuthRoutes'); 
 const SignUpRoutes=require('./routes/SignUpRoutes');
 const adminRoutes=require('./routes/AdminRoutes');
+const cartRoutes=require('./routes/CartRoutes');
 const { ErrorHandler, CreateError } = require('./middlewares/ErrorHandling'); 
 
 connectDB(); // Connect to MongoDB
@@ -30,6 +31,7 @@ app.use(session({
 app.use(AuthRoutes);
 app.use(SignUpRoutes);
 app.use(adminRoutes);
+app.use(cartRoutes);
 app.use('/', foodRoutes);  
 
 app.use(ErrorHandler);  

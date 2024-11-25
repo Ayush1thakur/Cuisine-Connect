@@ -4,11 +4,12 @@ const authenticateuser = require('../middlewares/Authentication');
 const userpresent = require("../middlewares/UserPresent");
 const jwt = require('jsonwebtoken');
 
-
+// Render login page
 router.get('/login', (req, res) => {
     res.render('login');
 });
 
+// Logout route
 router.get('/logout', (req, res) => {
     res.clearCookie('token', { 
         httpOnly: true, 
@@ -18,7 +19,7 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-
+// Login route
 router.post('/login', userpresent, authenticateuser, (req, res, next) => {
     try {
         const user = req.user; // The authenticated user object
@@ -26,13 +27,12 @@ router.post('/login', userpresent, authenticateuser, (req, res, next) => {
         // Generate JWT token with user details
         const token = jwt.sign(
             { 
-                userId: user.id, 
+                userId: user._id, // Use _id instead of id
                 email: user.email, 
                 name: user.name, 
                 isAdmin: user.isAdmin 
             },
             process.env.JWT_SECRET,
-            { expiresIn: '1h' }
         );
 
         // Send the token as a cookie
@@ -42,11 +42,12 @@ router.post('/login', userpresent, authenticateuser, (req, res, next) => {
             maxAge: 3600000  // 1 hour expiration
         });
 
-        if(user.isAdmin){
+        // Redirect based on user role
+        if (user.isAdmin) {
             return res.redirect('/admin');
         }
 
-        return res.redirect("/Home"); // Redirect after login success
+        return res.redirect('/Home'); // Redirect after login success
     } catch (err) {
         next(err);  // Handle errors gracefully
     }
