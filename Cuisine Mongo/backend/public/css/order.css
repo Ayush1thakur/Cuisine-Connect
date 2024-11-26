@@ -1,0 +1,72 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    color: #333;
+}
+
+/* Order List Styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px;
+}
+
+ul li.order-item {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul li strong {
+    color: #333;
+}
+
+/* Status Styling */
+.status {
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+/* Green for Completed, Yellow for Other Statuses */
+.status.completed {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+.status.pending,
+.status.in-progress,
+.status.cancelled {
+    background-color: #ffc107; /* Yellow */
+    color: white;
+}
+
+/* Items List Styling */
+ul li ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+ul li ul li {
+    margin-bottom: 5px;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 40px;
+}

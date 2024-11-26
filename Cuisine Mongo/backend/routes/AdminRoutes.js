@@ -12,7 +12,7 @@ router.get("/admin", isadmin, async (req, res, next) => {
     try {
         const user = req.user;  
         const products = await Product.find();  
-        res.render('AddFood', { foods: products, user });
+        res.render('addFood', { foods: products, user });
     } catch (err) {
         next(err);
     }

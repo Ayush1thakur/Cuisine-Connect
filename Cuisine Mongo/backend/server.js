@@ -11,6 +11,8 @@ const AuthRoutes = require('./routes/AuthRoutes');
 const SignUpRoutes=require('./routes/SignUpRoutes');
 const adminRoutes=require('./routes/AdminRoutes');
 const cartRoutes=require('./routes/CartRoutes');
+const OrderRoutes=require('./routes/OrderRoutes');
+const adminOrders=require('./routes/AdminOrder')
 const { ErrorHandler, CreateError } = require('./middlewares/ErrorHandling'); 
 
 connectDB(); // Connect to MongoDB
@@ -21,6 +23,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // Built-in middleware to parse JSON bodies
+
 
 app.use(session({
     secret: 'cuisine123', 
@@ -32,6 +36,8 @@ app.use(AuthRoutes);
 app.use(SignUpRoutes);
 app.use(adminRoutes);
 app.use(cartRoutes);
+app.use(OrderRoutes);
+app.use(adminOrders);
 app.use('/', foodRoutes);  
 
 app.use(ErrorHandler);  

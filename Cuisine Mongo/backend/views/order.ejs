@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel='stylesheet' type='text/css' href='/css/order.css'>
+    <link rel="stylesheet" href="/css/footer.css">
+</head>
+<body>
+    <%-include("./partial/Header");%>
+
+    <h1>Your Orders</h1>
+    <% if (orders.length === 0) { %>
+        <p>No orders found.</p>
+    <% } else { %>
+        <ul>
+            <% orders.forEach(order => { %>
+                <li class="order-item">
+                    <strong>Order Date:</strong> <%= new Date(order.orderDate).toLocaleString() %><br>
+                    <strong>Total Price:</strong> $<%= order.totalPrice.toFixed(2) %><br>
+                    <strong>Order Status:</strong>
+                    <span class="status <%= order.status.toLowerCase().replace(' ', '-') %>"><%= order.status %></span>
+                    <br>
+                    <strong>Items:</strong>
+                    <ul>
+                        <% order.items.forEach(item => { %>
+                            <li><%= item.quantity %> x <%= item.foodName %> ($<%= item.price.toFixed(2) %>)</li>
+                        <% }); %>
+                    </ul>
+                </li>
+                <hr>
+            <% }); %>
+        </ul>
+    <% } %>
+    <%-include("./partial/Footer");%>
+
+</body>
+</html>

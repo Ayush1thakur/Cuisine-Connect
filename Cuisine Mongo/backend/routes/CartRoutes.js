@@ -1,8 +1,8 @@
-// routes/cartRoutes.js
 const express = require('express');
 const router = express.Router();
 const Cart = require('../models/Cart');
 const User = require('../models/User');
+const Order = require('../models/Order'); 
 const stripe = require('../middlewares/Stripe'); // Import Stripe
 const handleToken = require('../middlewares/validToken');
 const { CreateError } = require('../middlewares/ErrorHandling');
@@ -62,7 +62,7 @@ router.post('/cart', handleToken, async (req, res, next) => {
         await cart.save();
 
         // Redirect back to the cart page
-        res.redirect('/cart');
+        res.redirect('/menu');
     } catch (err) {
         next(err);
     }
@@ -165,8 +165,6 @@ router.post('/cart/decrement', handleToken, async (req, res, next) => {
     }
 });
 
-
-
 router.get('/checkout', handleToken, async (req, res, next) => {
     const user = req.user; // User from the token
 
@@ -200,27 +198,34 @@ router.get('/checkout', handleToken, async (req, res, next) => {
             customer_email: user.email, // Add user email if available
         });
 
-        try {
-            // Find the user's cart
-            const cart = await Cart.findOne({ user: user.userId });
-    
-            if (cart) {
-                // Empty the cart
-                cart.items = [];
-                cart.totalPrice = 0;
-    
-                // Save the updated cart
-                await cart.save();
-            }
-        } catch (error) {
-            next(error); // Handle any errors
-        }
+        // Save the order details
+        const newOrder = new Order({
+            user: user.userId,
+            items: cart.items.map(item => ({
+                foodName: item.foodName,
+                price: item.price,
+                quantity: item.quantity,
+            })),
+            totalPrice: cart.totalPrice,
+            orderDate: new Date(),
+            status: 'pending',  // Default status set to 'pending'
+        });
+        
+
+        await newOrder.save();
+
+        // Empty the user's cart
+        cart.items = [];
+        cart.totalPrice = 0;
+        await cart.save();
+
         // Redirect to Stripe Checkout
         res.redirect(session.url);
     } catch (error) {
         next(error);
     }
 });
+
 
 router.get('/success',async (req, res, next) => {
     

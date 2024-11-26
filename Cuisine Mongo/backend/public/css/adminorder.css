@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    color: #333;
+}
+
+/* Header Styling */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+header a {
+    text-decoration: none;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    height: 40px;
+    width: 40px;
+}
+
+h2 {
+    margin: 0;
+}
+
+/* Button Styling */
+button.same {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff12;
+    border: 2px solid rgba(128, 128, 128, 0.5);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+button.same:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Order List Styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px;
+}
+
+ul li {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul li strong {
+    color: #333;
+}
+
+select {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+ul li ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+hr {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 40px;
+}
