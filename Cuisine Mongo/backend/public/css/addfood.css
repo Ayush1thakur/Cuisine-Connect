@@ -1,243 +1,234 @@
 /* General body and layout styles */
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+*{
     margin: 0;
-    background: #f7f7f7;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+
+
+body {
+    margin: 0;
+    background: #eeecec;
     font-family: Arial, sans-serif;
     color: #333;
+    position: relative;
 }
 
-/* Sticky header styling */
 header {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    background: #333;
-    color: #fff;
-    padding: 10px 0px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-#logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-#logo p {
-    margin: 0;
-    font-size: 16px;
-}
-
-/* Container for both form and edit sections */
-.container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    width: 90%;
-    /* max-width: 1000px; */
-    margin-top: 60px; 
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #1c1c1c; /* Example background color */
+    border-bottom: 0.1px solid #faf9f61e;
 }
-
-/* Form section styling */
-.form-section, .edit-section {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin: 10px;
+.admininfo{
     display: flex;
     flex-direction: column;
-    /* width: 48%;  */
+    align-items: start;
+    background-color: #1c1c1c;
+    color: #faf9f693;
+    padding: 70px 40% 50px 80px;
+    font-size: 20px;
 }
-.form-section{
-    background-color: #FAF9F6;
-    border: 1px solid rgba(0, 0, 0, 0.324);
+.admininfo h1{
+    color: #FAF9F6;
+    font-size: 50px;
+}
 
+.admininfo h1 b{
+    background: linear-gradient(to top, rgb(104, 212, 255), rgb(0, 142, 198));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
-.edit-section{
+
+#logo {/* Pushes the logo to the left */
+    display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        
+    }
+    
+    #logo img {
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #000;
+    }
+    
+    
+    #logo p {
+        margin: 0;
+        font-size: 16px;
+    }
+    
+    
+    
+    .same{
+        font-size: 16px;
+        color: #FAF9F6;
+    }
+
+
+
+ .afi{
+    position: absolute;
+    top: 7%;
+    right: 10%;
+    box-shadow:1px 1px 5px #1c1c1c54 ;
+    background-color: #FAF9F6;
+    z-index: 999;
+    border-radius: 5px;
+    padding: 50px 20px;
+ }
+/* Form section styling */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.form-section form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-section form input{
+    padding: 10px;
+    border: 1px solid #00000061;
+    box-shadow: 0px 1px rgba(0, 0, 0, 0.356);
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+.form-section form input::placeholder{
+    font-size: 15px;
+}
+
+.form-section form button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #ffd900;
+    cursor: pointer;
+    border: none;
+    font-size: 17px;
+}
+
+.form-section form button:hover {
+    background-color: #ffd900e5;
+}
+
+.efi {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 58%; 
+    margin: 30px;
+    margin-left: 70px;
+    padding: 35px;
+    gap: 20px;
+    border: 1px solid #1c1c1c;
+}
+
+
+.foodcont{
     width: 100%;
     display: flex;
-    flex: row;
-    gap: 5px;
-}
-
-h1 {
-    font-size: 22px;
-    color: #333;
-    margin-bottom: 15px;
-    text-align: center;
-}
-.foodcont{
-    padding: 10px;
-    display: flex;
-    gap:0px 20px;
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 2%;
 }
-
-
-
-/* Form styling */
-.add-food-form label, .edit-form label {
-    display: block;
-    font-size: 13px;
-    margin-bottom: 5px;
-}
-
-.add-food-form input, .edit-form input {
-    /* width: calc(100% - 22px);  */
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    box-sizing: border-box; /* Ensure padding and border are included in width */
-}
-
-button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Edit and delete button specific styles */
-.delete-btn {
-    background-color: #dc3545;
-}
-
-.delete-btn:hover {
-    background-color: #c82333;
-}
-
-.edit-btn {
-    background-color: #28a745;
-}
-
-.edit-btn:hover {
-    background-color: #218838;
-}
-
-.edit-section {
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
-    justify-content: center;
-    padding: 20px;
-}
-/* Food item styling */
 .food-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow:1px 1px 5px #1c1c1c54 ;
     background-color: #FAF9F6;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.208);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* padding: 25px 15px; */
-    padding-top: 25px;
+    padding: 25px 8px;
     margin: 10px 0;
-    width:45%;
+    width:30%;
     text-align: center;
     position: relative;
+    gap: 5px;
 }
 
 .food-item img {
-    width: 100px;
+    width: 80%;
     height: 100px;
     border-radius: 8px;
     margin-bottom: 10px;
 }
-
-.food-item h2 {
-    font-size: 18px;
-    margin: 10px 0;
+.edit-form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 10px 15px;
+    padding-bottom: 0;
 }
 
-.food-item p {
+.edit-form label{
+    font-weight: 600;
+}
+
+.edit-form input{
     font-size: 16px;
-    margin: 0px 0 5px;
-}
-
-.edit-form {
-    margin-top: 15px;
-    margin-bottom: 50px;
-}
-/* From Uiverse.io by liyaxu123 */ 
-.form-control {
-    margin: 20px 0 40px;
-    width: 190px;
-}
-
-.form-control input {
-background-color: transparent;
-border: 0;
-border-bottom: 2px #fff solid;
-display: block;
-width: 100%;
-padding: 15px 0;
-font-size: 18px;
-color: #fff;
-}
-
-.form-control input:focus,
-.form-control input:valid {
-outline: 0;
-border-bottom-color: lightblue;
-}
-
-.form-control label {
-position: absolute;
-top: 15px;
-left: 0;
-pointer-events: none;
-}
-
-.form-control label span {
-display: inline-block;
-font-size: 18px;
-min-width: 5px;
-color: #fff;
-transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.form-control input:focus+label span,
-.form-control input:valid+label span {
-color: lightblue;
-transform: translateY(-30px);
-}
-
-.imaginpt{
-    width: 80%;
+    padding: 5px;
+    width: 90%;
 }
 
 .edit-btn{
-    margin-top: 10px;
-    padding: 8.5px 15px;
-    border-radius: 10px;
-    position: absolute;
-    right: 23%;
-    bottom: 4%;
+    margin-top: 15px;
+    width: 99%;
+    border: none;
+    font-size: 17px;
+    background-color: #ffd900;
+    padding: 10px 20px;
+    border-radius: 5px;
+    align-self: center;
 }
+
 
 .delete-btn{
-    position: absolute;
-    border-radius: 10px;
-    left: 23%;
-    bottom: 4%;
+    width: 88%;
+    
 }
-
-
+.delete-btn button:hover {
+    background-color: #ef476f;
+    color: #1c1c1c;
+}
+.delete-btn .delete-btn{
+    width: 100%;
+    border: none;
+    font-size: 17px;
+    color: #ef476f;
+    background-color: #1c1c1c;
+    border-radius: 5px;
+    
+    padding: 12px;
+    align-self: center;
+}
