@@ -70,3 +70,16 @@ footer {
     text-align: center;
     margin-top: 40px;
 }
+.review-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.review-btn:hover {
+    background-color: #218838;
+}

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
-    <%-include("./partial/Header");%>
+    <%- include("./partial/Header"); %>
 
     <h1>Your Orders</h1>
     <% if (orders.length === 0) { %>
@@ -29,12 +29,34 @@
                             <li><%= item.quantity %> x <%= item.foodName %> ($<%= item.price.toFixed(2) %>)</li>
                         <% }); %>
                     </ul>
+
+                    <% if (order.status.toLowerCase() === 'completed') { %>
+                        <!-- Display review if it exists -->
+                        <% if (order.review) { %>
+                            <div class="review-section">
+                                <strong>Your Review:</strong>
+                                <p><strong>Rating:</strong> <%= order.review.rating %> Stars</p>
+                                <p><strong>Opinion:</strong> <%= order.review.opinion %></p>
+                                <div class="admin-reply">
+                                    <strong>Admin Remark:</strong>
+                                    <% if (order.review.adminRemark) { %>
+                                        <p><%= order.review.adminRemark %></p>
+                                    <% } else { %>
+                                        <p><em>No reply from admin yet.</em></p>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% } else { %>
+                            <!-- Review option if no review exists -->
+                            <a href="/orders/<%= order._id %>/review" class="btn review-btn">Leave a Review</a>
+                        <% } %>
+                    <% } %>
                 </li>
                 <hr>
             <% }); %>
         </ul>
     <% } %>
-    <%-include("./partial/Footer");%>
+    <%- include("./partial/Footer"); %>
 
 </body>
 </html>

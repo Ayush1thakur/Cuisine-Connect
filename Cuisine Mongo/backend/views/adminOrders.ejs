@@ -14,7 +14,7 @@
             <img class="logo" style="height:40px; width:40px " src="https://i.pinimg.com/1200x/9c/0e/de/9c0edef80de1893774c8a74883a916f9.jpg" alt="">
             <h2 style="color:white">Cuisine Connect</h2>
         </div>
-        <a href="/Admin" id="AdminOrder"><button class="same" style="display:flex; align-items:center; padding:10px; 
+        <a href="/admin" id="AdminOrder"><button class="same" style="display:flex; align-items:center; padding:10px; 
             background-color: #ffffff12; border: 2px solid rgba(128, 128, 128, 0.5);border-radius: 8px; margin:0;">Admin Panel</button></a>
 
         <a href="/logout" id="logout"><button class="same" style="display:flex; align-items:center; padding:10px; 
@@ -33,8 +33,8 @@
                     <strong>Total Price:</strong> $<%= order.totalPrice.toFixed(2) %><br>
                     <strong>Status:</strong> 
                     <select id="status-<%= order._id %>">
-                        <option value="Pending" <%= order.status === 'Pending' || !order.status ? 'selected' : '' %>>Pending</option>
-                        <option value="In Progress" <%= order.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+                        <option value="In Progress" <%= order.status === 'Pending' || !order.status ? 'selected' : '' %>>In Progress</option>
+                        <option value="Pending" <%= order.status === 'In Progress' ? 'selected' : '' %>>Pending</option>
                         <option value="Completed" <%= order.status === 'Completed' ? 'selected' : '' %>>Completed</option>
                         <option value="Cancelled" <%= order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
                     </select>                                      
