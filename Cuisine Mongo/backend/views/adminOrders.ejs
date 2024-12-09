@@ -14,43 +14,58 @@
             <img class="logo" style="height:40px; width:40px " src="https://i.pinimg.com/1200x/9c/0e/de/9c0edef80de1893774c8a74883a916f9.jpg" alt="">
             <h2 style="color:white">Cuisine Connect</h2>
         </div>
-        <a href="/admin" id="AdminOrder"><button class="same" style="display:flex; align-items:center; padding:10px; 
-            background-color: #ffffff12; border: 2px solid rgba(128, 128, 128, 0.5);border-radius: 8px; margin:0;">Admin Panel</button></a>
 
-        <a href="/logout" id="logout"><button class="same" style="display:flex; align-items:center; padding:10px; 
-            background-color: #ffffff12; border: 2px solid rgba(128, 128, 128, 0.5);border-radius: 8px; margin:0;">Logout</button></a>
+
+        <div class="apo">
+            <a href="/Admin" id="AdminOrder"><button class="same">Admin Panel</button></a>
+    
+            <a href="/logout" id="logout"><button class="same">Logout</button></a>
+        </div>
+
     </header>
 
-    <h1>All Orders</h1>
+    <div class="allo">
+        <h1>All Orders</h1>
 
     <% if (orders.length === 0) { %>
-        <p>No orders found.</p>
+        <p class="noo">No orders found.</p>
     <% } else { %>
-        <ul>
+        <ul class="ordercont">
             <% orders.forEach(order => { %>
-                <li>
-                    <strong>Order Date:</strong> <%= new Date(order.orderDate).toLocaleString() %><br>
-                    <strong>Total Price:</strong> $<%= order.totalPrice.toFixed(2) %><br>
-                    <strong>Status:</strong> 
-                    <select id="status-<%= order._id %>">
-                        <option value="In Progress" <%= order.status === 'Pending' || !order.status ? 'selected' : '' %>>In Progress</option>
-                        <option value="Pending" <%= order.status === 'In Progress' ? 'selected' : '' %>>Pending</option>
-                        <option value="Completed" <%= order.status === 'Completed' ? 'selected' : '' %>>Completed</option>
-                        <option value="Cancelled" <%= order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
-                    </select>                                      
-                    <button onclick="updateStatus('<%= order._id %>')">Update Status</button>
-                    <br>
-                    <strong>Items:</strong>
+                <li class="order">
+                    
+                    <div class="infocard">
+                        <div class="la">
+                            <strong>Order Date:</strong> <%= new Date(order.orderDate).toLocaleString() %>
+                        </div>
+                        <div class="la">
+                            <strong>Total Price:</strong> <span>₹<%= order.totalPrice.toFixed(2) %></span>
+                        </div>
+                        <div class="la">
+                            <strong>Status:</strong> 
+                            <select id="status-<%= order._id %>">
+                                <option value="Pending" <%= order.status === 'Pending' || !order.status ? 'selected' : '' %>>Pending</option>
+                                <option value="In Progress" <%= order.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+                                <option value="Completed" <%= order.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+                                <option value="Cancelled" <%= order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                            </select>                                      
+                            <button onclick="updateStatus('<%= order._id %>')">Update Status</button>
+                    </div>
+                        </div>
+                    <div class="itemscard">
+                        <strong>Items:</strong>
                     <ul>
                         <% order.items.forEach(item => { %>
-                            <li><%= item.quantity %> x <%= item.foodName %> ($<%= item.price.toFixed(2) %>)</li>
+                            <li><%= item.quantity %> x <%= item.foodName %> (₹<%= item.price.toFixed(2) %>)</li>
                         <% }); %>
                     </ul>
-                    <hr>
+                    </div>
                 </li>
+                <hr>
             <% }); %>
         </ul>
     <% } %>
+    </div>
 
     <%- include("./partial/Footer"); %>
 

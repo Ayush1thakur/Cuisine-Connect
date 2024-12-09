@@ -74,13 +74,15 @@
     <div id="loader-overlay" class="loader-overlay">
       <div class="loader"></div>
     </div>
-
+    <div class="menuh">
+      Menu
+    </div>
     <div class="food-container">
       <% foods.forEach(food => { %>
       <div class="food-item">
         <img src="/Images/<%= food.image %>" alt="<%= food.name %>" />
         <h2><%= food.name %></h2>
-        <p>Price: Rs.<%= parseFloat(food.price).toFixed(2) %></p>
+        <p>₹<%= parseFloat(food.price).toFixed(2) %></p>
         <form class="cart-form" action="/cart" method="POST">
           <input type="hidden" name="foodName" value="<%= food.name %>" />
           <input type="hidden" name="price" value="<%= food.price %>" />

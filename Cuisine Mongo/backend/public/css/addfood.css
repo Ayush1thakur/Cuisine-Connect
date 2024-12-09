@@ -12,7 +12,7 @@ a{
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: #1c1c1c;
 }
 
 /* Handle */
@@ -41,9 +41,53 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    background-color: #1c1c1c; /* Example background color */
+    background-color: #1c1c1c; 
     border-bottom: 0.1px solid #faf9f61e;
 }
+.apo{
+    display: flex;
+    gap: 10px;
+}
+.apo button{
+    border: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+#AdminOrder{
+    display:flex; 
+    align-items:center; 
+    padding:10px 20px; 
+    background-color: #ffd900; 
+    border-radius: 5px; 
+    margin:0;
+    
+}
+#AdminOrder button{
+    color: #1c1c1c;
+    font-weight: 600;
+
+}
+#AdminOrder:hover{
+    background-color: #ffd900e5; 
+    scale: 0.95;
+
+
+}
+#logout{
+    display:flex; 
+    align-items:center; 
+    padding:10px; 
+    background-color: #ffffff12; 
+    border: 2px solid rgba(128, 128, 128, 0.5);
+    border-radius: 8px; 
+    margin:0
+}
+#logout:hover{
+    box-shadow:1px 1px 5px #ffd90055;
+}
+
+
 .admininfo{
     display: flex;
     flex-direction: column;
@@ -139,6 +183,7 @@ header {
 
 .form-section form button:hover {
     background-color: #ffd900e5;
+    scale: 0.95;
 }
 
 .efi {
@@ -175,6 +220,9 @@ header {
     position: relative;
     gap: 5px;
 }
+.food-item:hover{
+    box-shadow:1px 1px 10px #1c1c1c70;
+}
 
 .food-item img {
     width: 80%;
@@ -210,6 +258,10 @@ header {
     padding: 10px 20px;
     border-radius: 5px;
     align-self: center;
+}
+.edit-btn:hover {
+    background-color: #f5d000;
+
 }
 
 

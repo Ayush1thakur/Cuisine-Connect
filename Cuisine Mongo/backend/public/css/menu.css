@@ -5,31 +5,65 @@ body {
     padding: 0;
 }
 
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #1c1c1c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+
+
+.menuh{
+    display: flex;
+    font-size: 35px;
+    font-weight: 600;
+    padding:50px 150px 10px;
+}
 /* Container for food items */
 .food-container {
+    /* border: 0.1px solid black; */
+    margin:20px 150px 100px;
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
-    justify-content: center;
-    padding: 20px;
+    flex-wrap: wrap;
+    gap: 2%;
 }
 
 .food-item {
-    width: 300px;
-    margin: 10px;
-    border: 1px solid #ddd;
-    border-radius: 15px;
+    padding: 8.4px;
+    width: 22%;
+    margin: 10px 0;
+    border-radius: 5px;
     overflow: hidden;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     position: relative;
     cursor: pointer;
+    border: 0.1px solid #0000001e;
+}
+.food-item:hover{
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.233);
+
 }
 
 .food-item img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-radius: 3px;
 }
 
 .food-details {
@@ -63,8 +97,7 @@ body {
     position: absolute; /* Absolute positioning */
     bottom: 12px; /* Position it 10px from the bottom */
     right: 15px; /* Position it 10px from the right */
-    background-color: #28a745;
-    color: white;
+    background-color: #ffd900e5;
     border: none;
     padding: 10px 15px;
     text-align: center;
@@ -73,9 +106,12 @@ body {
     font-size: 16px;
     cursor: pointer;
     border-radius: 100px;
+    font-weight: 600;
+    font-size: 20px;
+    scale: 0.9;
 }
 
 .add-to-cart-button:hover {
-    background-color: #218838;
+    scale: 1;
 }
 
