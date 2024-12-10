@@ -6,7 +6,11 @@
     
     <div id="header" >
         <% for(let i = 0; i < header.length; i++) { %>
-            <a style="font-size: 17px;" href="<%= header[i] %>"><%= header[i] %></a>
+            <%if(header[i]=="Home" || header[i]== "Menu"){%>
+                <a style="font-size: 17px;" href="<%= header[i] %>"><%= header[i] %></a>
+            <% }else{ %>
+                <a style="font-size: 17px;" href="Home#<%= header[i] %>"><%= header[i] %></a>
+            <% } %>
         <% } %>
     </div>
 
