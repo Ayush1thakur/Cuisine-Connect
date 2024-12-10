@@ -3,7 +3,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(#1c1c1c 250px,#fafafa 250px);
+    background: linear-gradient(#1c1c1c 35%,#fafafa 35%);
+    height: 100vh;
 }
 
 h1 {

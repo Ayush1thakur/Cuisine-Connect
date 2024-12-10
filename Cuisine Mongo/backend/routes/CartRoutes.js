@@ -7,8 +7,6 @@ const stripe = require('../middlewares/Stripe'); // Import Stripe
 const handleToken = require('../middlewares/validToken');
 const { CreateError } = require('../middlewares/ErrorHandling');
 
-const HeaderContent = ["Home", "Menu", "About", "Contact"];
-
 router.get('/cart', handleToken, async (req, res, next) => {
     const user = req.user; // User info from token
 
@@ -17,16 +15,16 @@ router.get('/cart', handleToken, async (req, res, next) => {
         const cart = await Cart.findOne({ user: user.userId });
 
         // If the cart doesn't exist, pass an empty array for items and totalPrice as 0
-        const cartData = cart
-            ? { cart: cart.items || [], totalPrice: cart.totalPrice || 0 }
-            : { cart: [], totalPrice: 0 };
+        if (!cart) {
+            return res.render('cart', { cart: [], totalPrice: 0 });
+        }
 
-        res.render('cart', { ...cartData, header: HeaderContent, user });
+        // Ensure that cart.items is an array even if it's empty
+        res.render('cart', { cart: cart.items || [], totalPrice: cart.totalPrice || 0 });
     } catch (err) {
         next(err);
     }
 });
-
 
 
 // POST /cart: Add an item to the user's cart
