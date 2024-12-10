@@ -208,7 +208,7 @@ router.get('/checkout', handleToken, async (req, res, next) => {
             })),
             totalPrice: cart.totalPrice,
             orderDate: new Date(),
-            status: 'pending',  // Default status set to 'pending'
+            status: 'In Progress',  // Default status set to 'pending'
         });
         
 

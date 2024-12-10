@@ -6,6 +6,7 @@ router.get('/admin/reviews', async (req, res, next) => {
     try {
         const ordersWithReviews = await Order.find({ 'review.rating': { $exists: true } })
             .populate('user', 'name email') // Populate user details if needed
+            .sort({ orderDate: -1 }) // Sort by orderDate in descending order
             .exec();
 
         res.render('adminReviews', { orders: ordersWithReviews });
@@ -13,6 +14,7 @@ router.get('/admin/reviews', async (req, res, next) => {
         next(error);
     }
 });
+
 
 router.post('/admin/reviews/:id/reply', async (req, res, next) => {
     const orderId = req.params.id;

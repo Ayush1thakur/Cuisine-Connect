@@ -112,6 +112,61 @@ h1 {
     font-size: 15px;
     font-weight: 400;
 }
+/* Ensure proper layout for order items */
+.order-item {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative; /* Ensures elements stack correctly */
+    z-index: 1; /* Prevents overlapping issues */
+}
+
+/* Review Section - No overlapping */
+.review-section {
+    background-color: #e9f7ef; /* Light green for positive reviews */
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #4ea728;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 0; /* Ensures it's below floating elements */
+}
+
+/* Admin Reply Section */
+.admin-reply {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9; /* Light gray for admin reply */
+    border: 1px dashed #888;
+    border-radius: 5px;
+}
+
+/* Prevent overflow */
+.order-item ul {
+    list-style-type: square;
+    padding-left: 20px;
+    margin: 10px 0;
+    word-wrap: break-word; /* Ensures text wraps */
+}
+
+.btn.review-btn {
+    margin-top: 15px; /* Add space from other content */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .order {
+        flex-direction: column; /* Ensure vertical stacking on smaller screens */
+    }
+}
 
 
 
