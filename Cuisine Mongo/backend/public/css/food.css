@@ -5,7 +5,9 @@ body {
     background-color: #FAF9F6 ;
 
 }
-
+html{
+    scroll-behavior: smooth;
+}
 ::-webkit-scrollbar {
     width: 4px;
 }
