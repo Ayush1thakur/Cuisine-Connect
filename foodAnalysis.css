@@ -1,0 +1,130 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1, h2 {
+    font-family: 'Arial', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    padding: 10px 30px;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo h2 {
+    color: white;
+}
+
+#logo .logo {
+    height: 40px;
+    width: 40px;
+}
+
+.apo {
+    display: flex;
+    gap: 15px;
+}
+
+
+
+/* Main Title */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 40px;
+    font-size: 2.5rem;
+}
+
+/* Chart Container */
+.charts-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.chart-container {
+    width: 48%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: white;
+}
+
+.bar-chart {
+    width: 70%; /* Bigger size for bar chart */
+}
+
+.pie-chart, .rating-pie-chart {
+    width: 30vw; /* Smaller size for pie chart */
+    max-height: 250px; /* Limit height */
+}
+
+/* Statistics Container */
+.statistics {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.statistics h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.statistics div {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Footer Styles (assumed that Footer is in a partial file) */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: white;
+    margin-top: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .charts-container {
+        flex-direction: column;
+    }
+
+    .chart-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

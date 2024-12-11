@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Item Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for graphs -->
+    <link rel="stylesheet" type="text/css" href="/css/addfood.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/foodAnalysis.css">
+</head>
+<body>
+    <header>
+        <div id="logo" style="display: flex; flex-direction: row; align-items:center; gap:10px">
+            <img class="logo" style="height:40px; width:40px" src="https://i.pinimg.com/1200x/9c/0e/de/9c0edef80de1893774c8a74883a916f9.jpg" alt="">
+            <h2 style="color:white">Cuisine Connect</h2>
+        </div>
+
+        <div class="apo">
+            <a href="/Admin" id="AdminOrder"><button class="same">Admin Panel</button></a>
+            <a href="/admin/reviews" id="AdminOrder"><button class="same">Reviews</button></a>
+            <a href="/AdminOrder" id="AdminOrder"><button class="same">Orders</button></a>
+            <a href="/logout" id="logout"><button class="same">Logout</button></a>
+        </div>
+    </header>
+
+    <h1>Food Item Analysis</h1>
+
+    <div style="display: flex;flex-direction: row;gap: 15px; margin-top: 20px;">
+
+        
+        <!-- Bar Chart Container -->
+        <div class="chart-container bar-chart">
+            <h3>Food Ratings and Orders</h3> <!-- Heading for Bar Chart -->
+            <canvas id="foodChart"></canvas>
+        </div>
+        
+        <div class="charts-container" style="display: grid;">
+            
+            <!-- Rating Pie Chart Below the First Pie Chart -->
+            <div class="chart-container rating-pie-chart">
+                <h3>Rating Distribution</h3> <!-- Heading for Rating Distribution Pie Chart -->
+                <canvas id="ratingPieChart"></canvas>
+            </div>
+            
+            
+            <!-- Pie Chart Container -->
+            <div class="chart-container pie-chart">
+                <h3>Total Orders Distribution</h3> <!-- Heading for Total Orders Pie Chart -->
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <!-- Mathematical Statistics Below Charts -->
+    <div class="statistics">
+        <h3>Mathematical Statistics</h3>
+        <div id="avgRatingStat"></div>
+        <div id="totalOrdersStat"></div>
+        <div id="highestRating"></div>
+        <div id="lowestRating"></div>
+        <div id="avgOrders"></div>
+    </div>
+
+    <%-include("./partial/Footer");%>
+
+    <script>
+        // Pass the foodRatings array from the backend to the frontend
+        const data = <%- JSON.stringify(foodRatings) %>;
+        console.log(data);  // Check if data is passed correctly
+
+        // Prepare data for the charts
+        const foodNames = data.map(item => item.foodName);
+        const avgRatings = data.map(item => item.avgRating);
+        const totalOrders = data.map(item => item.totalOrders);
+
+        // Bar Chart (Top Chart)
+        const ctxBar = document.getElementById('foodChart').getContext('2d');
+        const foodChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: foodNames,
+                datasets: [{
+                    label: 'Average Rating',
+                    data: avgRatings,
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Total Orders',
+                    data: totalOrders,
+                    backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 10 // You can adjust this value as needed
+                        }
+                    }
+                }
+            }
+        });
+
+        // Pie Chart (Total Orders Distribution)
+        const ctxPie = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: foodNames,
+                datasets: [{
+                    data: totalOrders, // Display total orders in the pie chart
+                    backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(153, 102, 255, 0.7)'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutoutPercentage: 40 // Reduces the size of the pie chart
+            }
+        });
+
+        // Rating Pie Chart (Rating Distribution)
+        const ratingCategories = ['Excellent', 'Good', 'Average', 'Poor'];
+        const ratingCounts = [0, 0, 0, 0];
+
+        // Count the number of items in each rating category
+        avgRatings.forEach(rating => {
+            if (rating >= 4.5) {
+                ratingCounts[0]++; // Excellent
+            } else if (rating >= 3.5) {
+                ratingCounts[1]++; // Good
+            } else if (rating >= 2.5) {
+                ratingCounts[2]++; // Average
+            } else {
+                ratingCounts[3]++; // Poor
+            }
+        });
+
+        const ctxRatingPie = document.getElementById('ratingPieChart').getContext('2d');
+        const ratingPieChart = new Chart(ctxRatingPie, {
+            type: 'pie',
+            data: {
+                labels: ratingCategories,
+                datasets: [{
+                    data: ratingCounts,
+                    backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.7)'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutoutPercentage: 40
+            }
+        });
+
+        // Display Mathematical Statistics below the charts
+        const avgRating = avgRatings.reduce((a, b) => a + b, 0) / avgRatings.length;
+        const totalOrdersSum = totalOrders.reduce((a, b) => a + b, 0);
+        const highestRating = Math.max(...avgRatings);
+        const lowestRating = Math.min(...avgRatings);
+        const avgOrders = totalOrders.reduce((a, b) => a + b, 0) / totalOrders.length;
+
+        document.getElementById('avgRatingStat').innerHTML = `Average Rating: ${avgRating.toFixed(2)}`;
+        document.getElementById('totalOrdersStat').innerHTML = `Total Orders: ${totalOrdersSum}`;
+        document.getElementById('highestRating').innerHTML = `Highest Rating: ${highestRating}`;
+        document.getElementById('lowestRating').innerHTML = `Lowest Rating: ${lowestRating}`;
+        document.getElementById('avgOrders').innerHTML = `Average Orders: ${avgOrders.toFixed(0)}`;
+    </script>
+</body>
+</html>
