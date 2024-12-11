@@ -5,7 +5,9 @@ body {
     background-color: #FAF9F6 ;
 
 }
-
+html{
+    scroll-behavior: smooth;
+}
 ::-webkit-scrollbar {
     width: 4px;
 }
@@ -28,8 +30,30 @@ body {
 
 
 
+a{
+    text-decoration: none;
+}
+.btan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 4px;
+    background-color: #ffd900;
+    cursor: pointer;
+    border: none;
+    box-shadow: 2px 2px 2px #555;
+}
 
-
+.btan:hover {
+    background-color: #ffd900e5;
+    scale: 0.97;
+    box-shadow: 1px 1px 2px #555;
+}
 .home{
     height: 91vh;
     display: flex;
@@ -37,7 +61,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 70px ;
-    padding-top: 30px;
+    padding-top: 20px;
     background: linear-gradient(to bottom,rgba(250, 249, 246,1), rgba(255,255,255,0) 50%,
               rgba(250, 249, 246,1)), url(https://codeplay-edtech-project.vercel.app/static/media/bghome.de04eae287ff1d29f0b1.svg);
 }

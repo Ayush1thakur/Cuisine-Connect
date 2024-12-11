@@ -29,16 +29,20 @@
     <div class="charts-container">
         <!-- Bar Chart Container -->
         <div class="chart-container bar-chart">
+            <h3>Food Ratings and Orders</h3> <!-- Heading for Bar Chart -->
             <canvas id="foodChart"></canvas>
         </div>
+
         <!-- Pie Chart Container -->
         <div class="chart-container pie-chart">
+            <h3>Total Orders Distribution</h3> <!-- Heading for Total Orders Pie Chart -->
             <canvas id="pieChart"></canvas>
         </div>
     </div>
 
     <!-- Rating Pie Chart Below the First Pie Chart -->
     <div class="chart-container rating-pie-chart">
+        <h3>Rating Distribution</h3> <!-- Heading for Rating Distribution Pie Chart -->
         <canvas id="ratingPieChart"></canvas>
     </div>
 
@@ -64,7 +68,7 @@
         const avgRatings = data.map(item => item.avgRating);
         const totalOrders = data.map(item => item.totalOrders);
 
-        // Bar Chart (Left Chart)
+        // Bar Chart (Top Chart)
         const ctxBar = document.getElementById('foodChart').getContext('2d');
         const foodChart = new Chart(ctxBar, {
             type: 'bar',
@@ -97,7 +101,7 @@
             }
         });
 
-        // Pie Chart (Right Chart)
+        // Pie Chart (Total Orders Distribution)
         const ctxPie = document.getElementById('pieChart').getContext('2d');
         const pieChart = new Chart(ctxPie, {
             type: 'pie',
@@ -116,7 +120,7 @@
             }
         });
 
-        // Rating Pie Chart (Below Pie Chart)
+        // Rating Pie Chart (Rating Distribution)
         const ratingCategories = ['Excellent', 'Good', 'Average', 'Poor'];
         const ratingCounts = [0, 0, 0, 0];
 

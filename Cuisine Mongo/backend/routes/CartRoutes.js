@@ -7,6 +7,8 @@ const stripe = require('../middlewares/Stripe'); // Import Stripe
 const handleToken = require('../middlewares/validToken');
 const { CreateError } = require('../middlewares/ErrorHandling');
 
+const HeaderContent = ["Home", "Menu", "About", "Contact"];
+
 router.get('/cart', handleToken, async (req, res, next) => {
     const user = req.user; // User info from token
 
@@ -20,7 +22,7 @@ router.get('/cart', handleToken, async (req, res, next) => {
         }
 
         // Ensure that cart.items is an array even if it's empty
-        res.render('cart', { cart: cart.items || [], totalPrice: cart.totalPrice || 0 });
+        res.render('cart', { cart: cart.items || [], totalPrice: cart.totalPrice || 0 ,header: HeaderContent,user});
     } catch (err) {
         next(err);
     }
