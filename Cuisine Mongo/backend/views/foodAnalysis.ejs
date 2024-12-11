@@ -25,26 +25,34 @@
     </header>
 
     <h1>Food Item Analysis</h1>
-    
-    <div class="charts-container">
+
+    <div style="display: flex;flex-direction: row;gap: 15px; margin-top: 20px;">
+
+        
         <!-- Bar Chart Container -->
         <div class="chart-container bar-chart">
             <h3>Food Ratings and Orders</h3> <!-- Heading for Bar Chart -->
             <canvas id="foodChart"></canvas>
         </div>
-
-        <!-- Pie Chart Container -->
-        <div class="chart-container pie-chart">
-            <h3>Total Orders Distribution</h3> <!-- Heading for Total Orders Pie Chart -->
-            <canvas id="pieChart"></canvas>
+        
+        <div class="charts-container" style="display: grid;">
+            
+            <!-- Rating Pie Chart Below the First Pie Chart -->
+            <div class="chart-container rating-pie-chart">
+                <h3>Rating Distribution</h3> <!-- Heading for Rating Distribution Pie Chart -->
+                <canvas id="ratingPieChart"></canvas>
+            </div>
+            
+            
+            <!-- Pie Chart Container -->
+            <div class="chart-container pie-chart">
+                <h3>Total Orders Distribution</h3> <!-- Heading for Total Orders Pie Chart -->
+                <canvas id="pieChart"></canvas>
+            </div>
         </div>
+        
     </div>
 
-    <!-- Rating Pie Chart Below the First Pie Chart -->
-    <div class="chart-container rating-pie-chart">
-        <h3>Rating Distribution</h3> <!-- Heading for Rating Distribution Pie Chart -->
-        <canvas id="ratingPieChart"></canvas>
-    </div>
 
     <!-- Mathematical Statistics Below Charts -->
     <div class="statistics">
